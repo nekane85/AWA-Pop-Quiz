@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Students</h1>
+
+<table id="myTable">
+  <thead>
+    <tr>
+      <th>Student first name</th>
+      <th>Student last name</th>
+      <th>Student email</th>
+      <th>Student linkedin</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.student_first_name %></td>
+        <td><%= student.student_last_name %></td>
+        <td><%= student.student_email %></td>
+        <td><%= student.student_linkedin %></td>
+        <td><%= link_to 'Show', student %></td>
+        <td><%= link_to 'Edit', edit_student_path(student) %></td>
+        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Student', new_student_path %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  console.log('Searching')
+  jQuery("#myInput").on("keyup", function() {
+    console.log('Type key')
+    var value = jQuery(this).val().toLowerCase();
+    jQuery("#myTable tr").filter(function() {
+      jQuery(this).toggle(jQuery(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
